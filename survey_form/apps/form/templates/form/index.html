@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Form</title>
+    {% load staticfiles %}
+    <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'form/css/main.css' %}">
+  </head>
+  <body>
+    <div id="container">
+      <h3>Survey Form</h3>
+      <form action="/surveys/process" method="POST">
+        {% csrf_token %}
+        <ul>
+          <li>
+            <label name="name">Name:</label>
+            <input type="text" name="name">
+          </li>
+          <li>
+            <label name="location">Location:</label>
+            <select name="location">
+              <option>Mountain View</option>
+              <option>San Deigo</option>
+              <option>Seattle</option>
+              <option>Dallas</option>
+            </select>
+          </li>
+          <li>
+            <label name="language">Language:</label>
+            <select name="language">
+              <option>JavaScript</option>
+              <option>HTML</option>
+              <option>Python</option>
+              <option>C</option>
+            </select>
+          </li>
+          <li>
+            <label name="comment">Comment (optional):</label>
+            <textarea name="comment" cols="40" rows="10"></textarea>
+          </li>
+          <li>
+            <input type="submit" value="Submit">
+          </li>
+        </ul>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Django Index</title>
+    {% load staticfiles %}
+    <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'disappearing_ninjas/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'disappearing_ninjas/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <!-- Display all the turtle images depending on the url passed -->
+      {% if color == "blue" or color == "" %}
+      <img alt="blue" src="{% static 'disappearing_ninjas/img/blue.jpg' %}">
+      {% endif %}
+      {% if color == "orange" or color == "" %}
+      <img alt="orange" src="{% static 'disappearing_ninjas/img/orange.jpg' %}">
+      {% endif %}
+      {% if color == "red" or color == "" %}
+      <img alt="red" src="{% static 'disappearing_ninjas/img/red.jpg' %}">
+      {% endif %}
+      {% if color == "purple" or color == "" %}
+      <img alt="purple" src="{% static 'disappearing_ninjas/img/purple.jpg' %}">
+      {% endif %}
+    </div>
+  </body>
+</html>

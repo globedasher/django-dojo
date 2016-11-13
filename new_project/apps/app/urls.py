@@ -1,8 +1,8 @@
-from django.urls.conf import url, HttpResponse
+from django.conf.urls import url
 #from django.contrib import admin
 
 from . import views
 
 urlpatterns = [
-    url(r'^$', url(views.index)),
+    url(r'^$', views.index),
 ]
