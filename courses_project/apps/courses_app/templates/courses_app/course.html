@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courses_app/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'courses_app/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h3>Are you sure you want to delete {{ course.course_name }}?</h3>
+      <h5>Course Name: {{ course.course_name }}</h5>
+      <h5>Course Description: {{ course.course_description }}</h5>
+      </table>
+      <form action="/" class="button" method='POST'>
+        {% csrf_token %}
+        <input type="submit" value='No.'>
+      </form>
+      <form action="/delete/{{ course.id }}/" class="button" method='POST'>
+        {% csrf_token %}
+        <input type="submit" value='Yes, I want to delete this.'>
+      </form>
+    </div>
+  </body>
+</html>

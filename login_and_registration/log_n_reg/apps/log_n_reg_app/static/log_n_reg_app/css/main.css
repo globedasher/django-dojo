@@ -1,0 +1,12 @@
+#container {
+  margin: 0 auto;
+  width: 800px;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+form {
+  width: 200px;
+}
