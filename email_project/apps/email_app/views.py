@@ -23,7 +23,8 @@ def submit(request):
 
         print(tuple_return[1].id)
         messages.success(request, "The email address you entered " 
-                + str(tuple_return[1].email_address) + " is a VALID email address! Thank you !")
+                + str(tuple_return[1].email_address) 
+                + " is a VALID email address! Thank you !")
 
         all_emails = Email.objects.all()
         context = { 'email': tuple_return[1], 'all_emails': all_emails }

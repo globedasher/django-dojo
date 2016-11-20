@@ -1,0 +1,20 @@
+#container {
+  margin: 0 auto;
+  width: 1000px;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+form {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+#reset {
+  border: none;
+}
