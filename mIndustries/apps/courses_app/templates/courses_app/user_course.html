@@ -44,18 +44,14 @@
           <th>Course Name</th>
           <th>Attending</th>
         </tr>
-        {% for course in courses %}
+        {% for course in course_filter %}
         <tr>
           <td>{{ course.id }}</td>
           <td>{{ course.course_name }}</td>
-          <td>{{ course.student }}</td>
-          <td>{{ course.courses.user }}</td>
-          <td>{{ student.first_name }}</td>
-          <td>{{ course.user.id }}</td>
+          <td>{{ course.number }}</td>
         </tr>
         {% endfor %}
       </table>
-        {{ course_filter }}
       <a href={% url 'courses:index' %}>Back to Courses Home</a>
     </div>
   </body>
