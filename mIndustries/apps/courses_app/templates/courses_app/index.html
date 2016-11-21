@@ -35,8 +35,7 @@
           <th>Course Description</th>
           <th>Created</th>
           <th>Updated</th>
-          <th>Created by</th>
-          <th>email</th>
+          <th>Attending</th>
           <th>Delete</th>
         </tr>
         {% for course in courses %}
@@ -46,12 +45,12 @@
           <td>{{ course.course_description }}</td>
           <td>{{ course.created_at }}</td>
           <td>{{ course.updated_at }}</td>
-          <td>{{ course.user.first_name }}</td>
-          <td>{{ course.user.email }}</td>
+          <td></td>
           <td><a href={% url 'courses:delete' course.id %}>Remove</a></td>
         </tr>
         {% endfor %}
       </table>
+      <a href={% url 'courses:show' %}>Add users</a>
       <a href={% url 'login:home' %}>Home</a>
       <div>
         <p>The section below is showing how to  use a model from another app in a multiple applciation project.</p>

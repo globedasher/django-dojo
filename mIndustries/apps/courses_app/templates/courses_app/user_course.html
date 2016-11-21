@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courses_app/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'courses_app/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="messages">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <h3>Welcome to Courses!</h3>
+      <form action={% url 'courses:assign' %} method="POST">
+        {% csrf_token %}
+        <select name="users">
+          <option>Users</option> <!-- Default for select -->
+          {% for user in users %}
+          <option value={{ user.id }}>{{ user.email }}</option>
+          {% endfor %}
+        </select>
+        <select name="courses">
+          <option>Courses</option> <!-- Default for select -->
+          {% for course in courses %}
+          <option value={{ course.id }}>{{ course.course_name }}</option>
+          {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+      </form>
+      <table>
+        <tr>
+          <th>Course Id</th>
+          <th>Course Name</th>
+          <th>Attending</th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+          <td>{{ course.id }}</td>
+          <td>{{ course.course_name }}</td>
+          <td>{{ course.student }}</td>
+          <td>{{ course.student.user }}</td>
+          <td>{{ student.first_name }}</td>
+          <td>{{ course.user.id }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+        {{ course_filter }}
+      <a href={% url 'courses:index' %}>Back to Courses Home</a>
+    </div>
+  </body>
+</html>
