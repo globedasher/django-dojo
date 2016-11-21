@@ -11,7 +11,6 @@ class CourseManager(models.Manager):
         user = User.objects.get(id=user_id)
         course.student.add(user)
         course.save()
-        print(course.student.id)
         return (True, course)
             
 

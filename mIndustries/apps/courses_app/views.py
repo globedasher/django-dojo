@@ -20,9 +20,12 @@ def index(request):
 def show(request):
     courses = Course.objects.all()
     users = User.objects.all()
-    course_filter = Course.objects.filter()
-    for course in course_filter:
-        print(course.student)
+    # Hmm... I thought I had a grasp of the ORM ideas, but this next filter is
+    # throwing me for a loop!
+    course_filter = Course.objects.filter(student__courses=2).count()
+    #for course in course_filter:
+    #    print(type(course.student))
+    #    print(course.course_name)
     context = { 'courses': courses, 'users': users, 'course_filter': course_filter }
     return render(request, 'courses_app/user_course.html', context)
 
@@ -66,7 +69,6 @@ def delete(request, course_id):
         context = { 'course': course }
         return render(request, "courses_app/course.html", context)
     if request.method == 'POST':
-        print('here!')
         Course.objects.filter(id=course_id).delete()
         return redirect(reverse('courses:index'))
     else:

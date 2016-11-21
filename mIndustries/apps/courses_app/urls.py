@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^courses/create$', views.create, name="create"),
     url(r'^courses/show$', views.show, name="show"),
     url(r'^courses/assign$', views.assign, name="assign"),
-    url(r'^courses/delete/(?P<course_id>[0-9]+)$', views.delete, name="delete"),
+    url(r'^courses/delete/(?P<course_id>[0-9]+)/$', views.delete, name="delete"),
 ]
