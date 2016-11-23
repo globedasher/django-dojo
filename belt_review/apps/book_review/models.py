@@ -20,17 +20,14 @@ class BookManager(models.Manager):
         select_author = args[0]['select_author']
         review = args[0]['review']
         rating = args[0]['rating']
+        user_id = args[1]
+
+        #print(book_title, author_text, select_author, review, rating, user_id)
 
         # The errors list is used to append any validiation errors found when
         # adding on a book and review.
         errors = []
-
-        #print(book_title, author_text, select_author, review, rating)
         
-        # Right now, I have the user id hardcoded for who is creating the
-        # books. I need to bring in my request.session['id']
-        user_id = 2
-
         # Check for author_text and length of author_text, or if the
         # select_author selection menu was used, ignore the author_text field.
         if not select_author and not author_text:
@@ -50,9 +47,11 @@ class BookManager(models.Manager):
         elif len(review) < 5:
             errors.append("Book reviews must be at least 5 characters.")
 
+        print(rating)
+
         # Check for a rating
-        #if not rating:
-            #errors.append("Please select a rating.")
+        if rating <= 0:
+            errors.append("Please select a rating.")
 
         if errors:
             return (False, errors)

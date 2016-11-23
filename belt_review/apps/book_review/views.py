@@ -6,7 +6,7 @@ from .models import Book, Review, Author
 from ..users.models import User
 
 def index(request):
-    reviews = Review.objects.all()
+    reviews = Review.objects.filter()
     authors = Author.objects.all()
     context = { 'authors': authors, 'reviews': reviews }
     return render(request, "book_review/index.html", context)
@@ -20,7 +20,9 @@ def create(request):
     if request.method == 'POST':
         try:
             #print('try')
-            return_tuple = Book.objects.new(request.POST)
+            print(request.session['id'])
+            print(request.session['email'])
+            return_tuple = Book.objects.new(request.POST, request.session['id'])
             if return_tuple[0] == True:
                 # If return_tuple[0] is True, the object has been created and
                 # added to the database.
