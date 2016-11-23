@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'book_review/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'book_review/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="messages">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <form action={% url 'books:create' %} method='POST'>
+        {% csrf_token %}
+        <p>Please add a title for the book to add</p>
+        <input type='text' name='book_title' placeholder='Title'>
+        <p>Please select an author from the following list</p>
+        <select name='select_author'>
+          <option value=''>Select an Author</option>
+          {% for author in authors %}
+          <option value={{ author.id }}>{{ author.name }}</option>
+          {% endfor %}
+        </select>
+        <p>or add a new author</p>
+        <input type='text' name='author_text' placeholder='Author Name'><br>
+        <textarea name='review' rows='10' cols='40' placeholder='Enter your review here'></textarea><br>
+        <select name='rating'>
+          <option>Select a rating</option>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+          <option value='5'>5</option>
+        </select><br>
+        <input type='submit' value='Submit Review'>
+      </form>
+      <a href={% url 'books:index' %}>Back to Books Home</a>
+    </div>
+  </body>
+</html>

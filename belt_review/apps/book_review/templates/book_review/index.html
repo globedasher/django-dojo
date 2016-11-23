@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'log_n_reg_app/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'log_n_reg_app/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="enabled_user">
+        {% if request.session.id %}
+        <h5>Hello, {{ request.session.email }}!</h5>
+        {% endif %}
+      </div>
+      <h4>Books!</h4>
+      <div id="messages">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <a href={% url 'books:new' %}>Add a new book and review</a>
+      <div>
+      <table>
+        <tr>
+          <th>Book Id</th>
+          <th>Book Title</th>
+          <th>Book added by</th>
+          <th>Author Name</th>
+          <th>Author added by</th>
+          <th>Review</th>
+        </tr>
+        {% for review in reviews %}
+        <tr>
+          <td>{{ review.book.id }}</td>
+          <td><a href={% url 'books:show' review.book.id %}>{{ review.book.book_title }}</a></td>
+          <td>{{ review.book.created_by.email }}</td>
+          <td>{{ review.book.author.name }}</td>
+          <td>{{ review.book.author.created_by.email }}</td>
+          <td>{{ review.review }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+      <a href={% url 'login:home' %}>Home</a>
+    </div>
+  </body>
+</html>
