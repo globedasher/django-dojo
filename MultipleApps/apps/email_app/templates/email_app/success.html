@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Email</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'email_app/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'email_app/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h4>Email submission</h4>
+      {% if messages %}
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+      {% endif %}
+
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Email Address</th>
+          <th>Created</th>
+          <th>Updated</th>
+        </tr>
+        {% if all_emails %}
+        {% for email in all_emails %}
+        <tr>
+          <td>{{ email.id }}</td>
+          <td>{{ email.email_address }}</td>
+          <td>{{ email.created_at }}</td>
+          <td>{{ email.updated_at }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </table>
+      <a href={% url 'email_validation:index' %}>Back</a>
+    </div>
+  </body>
+</html>

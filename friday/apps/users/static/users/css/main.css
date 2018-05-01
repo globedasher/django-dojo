@@ -1,0 +1,41 @@
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+form {
+  width: 200px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#container {
+  margin: 0 auto;
+  width: 1000px;
+}
+
+#registration {
+  display: inline-block;
+}
+
+#login {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#messages {
+  width: 500px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}

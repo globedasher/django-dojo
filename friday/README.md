@@ -1,0 +1,3 @@
+The ip address of my project is 35.165.62.18
+
+I didn't finish the totlizing of my pokes...

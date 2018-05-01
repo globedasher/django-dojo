@@ -1,0 +1,25 @@
+<html>
+    <head>
+          <title>Users</title>
+    </head>
+    <body>
+        <h2>Edit a User</h2>
+        <p>ID: {{ user ['id'] }}</p>
+        <form action="/users/{{ user['id'] }}/update" method='post'>
+            <label for="username">Username:
+                <input type="text" name="username" id="username" value="{{ user['username'] }}">
+            </label>
+            <label for="email">Email: 
+                <input type="text" name="email" id="email" value="{{ user ['email'] }}">
+            </label>
+            <label for="password">Password:
+                <input type="text" name="password" id="password" value="{{ user
+                ['pw_hash'] }}">
+            </label> 
+            <input type="submit" value="Edit">
+        </form>
+        <p>Created at: {{ user ['created_at'] }}</p>
+        <p>Updated at: {{ user ['updated_at'] }}</p>
+    </body>
+</html>
+

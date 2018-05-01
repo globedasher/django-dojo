@@ -1,0 +1,21 @@
+            {% for message in data %}
+            <ul>
+                <li>Posted by: "{{ message['first_name'] }}" @ {{
+                    message['time'] }}</li>
+                <li>{{ message['message'] }}</li>
+                {% for comment in comment_data %}
+                {% if comment['message_id'] == message['id'] %}
+                <ul>
+                    <li>Comment from:"{{ comment['first_name'] }}" @ {{ comment['created_at'] }} </li>
+                    <li>{{ comment['comment'] }}</li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <h4>Post a comment</h4>
+            <form action="/comment" method="post">
+                <input name="hidden_id" value="{{ message['id']}}" type="hidden">
+                <textarea name="comment" rows="7" cols="60"></textarea>
+                <input type="submit" value="comment">
+            </form>
+            {% endfor %}

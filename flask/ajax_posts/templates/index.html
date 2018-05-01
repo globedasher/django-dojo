@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Quotes</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="../static/js/main.js"></script>
+    </head>
+    <body>
+        <div id='container'>
+            <h2>Notes</h2>
+            <p>The notes entry box is at the bottom of the page.</p>
+            <div id="notes">
+            </div>
+            <marquee>marquee</marquee>
+            <form action="/note/create" id="new" method="post">
+                <h4>Add a new Note</h4>
+                <input type="text" name="title" placeholder="title">
+                <textarea type="text" name="note" placeholder="Note" rows="15" cols="70"></textarea>
+                <input type="submit" value="Post Note">
+            </form>
+        </div>
+    </body>
+</html>

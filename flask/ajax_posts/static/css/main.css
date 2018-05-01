@@ -1,0 +1,21 @@
+* {
+    font-family: sans-serif;
+}
+
+#container {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+input, textarea {
+  display: block;
+}
+
+marquee {
+  color: white;
+  background-color: blue;
+}
+
+.note {
+  border: 1px solid black;
+}

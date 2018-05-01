@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courses_app/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'courses_app/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h3>Welcome to Courses!</h3>
+      <form action={% url 'courses:create' %} method="POST">
+        {% csrf_token %}
+        <label for="course_name">Course Name:</label>
+        <input type="text" name="course_name">
+        <label for="course_description">Course Description:</label>
+        <textarea name="course_description"></textarea>
+        <input type="submit" value="Submit">
+      </form>
+      {% if messages %}
+      <ul class='messages'>
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Course Name</th>
+          <th>Course Description</th>
+          <th>Created</th>
+          <th>Updated</th>
+          <th>Attending</th>
+          <th>Delete</th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+          <td>{{ course.id }}</td>
+          <td>{{ course.course_name }}</td>
+          <td>{{ course.course_description }}</td>
+          <td>{{ course.created_at }}</td>
+          <td>{{ course.updated_at }}</td>
+          <td></td>
+          <td><a href={% url 'courses:delete' course.id %}>Remove</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+      <a href={% url 'courses:show' %}>Add users</a>
+      <a href={% url 'login:home' %}>Home</a>
+      <p>Randy!</p>
+      <p>Randy is enrolled in {{ count }}/{{ course_count }} courses.</p>
+      <p>Randy is NOT enrolled in {{ inverse_count }}/{{ course_count }} courses.</p>
+      <div>
+        <p>The section below is showing how to  use a model from another app in a multiple applciation project.</p>
+        {% for user in all_users %}
+        <p>
+          {{ user.id }}
+          {{ user.first_name }}
+          {{ user.last_name }}
+          {{ user.email }}
+        </p>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

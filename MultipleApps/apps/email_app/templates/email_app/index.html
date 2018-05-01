@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Email</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'email_app/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'email_app/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h4>Email submission</h4>
+      <form action={% url 'email_validation:submit' %} method="POST">
+        {% csrf_token %}
+        <input type="text" name="email_address" placeholder="email address">
+        <input type="submit" value="Submit">
+      </form>
+      {% if messages %}
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+      {% endif %}
+
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Email Address</th>
+          <th>Created</th>
+          <th>Updated</th>
+        </tr>
+        {% if all_emails %}
+        {% for email in all_emails %}
+        <tr>
+          <td>{{ email.id }}</td>
+          <td>{{ email.email_address }}</td>
+          <td>{{ email.created_at }}</td>
+          <td>{{ email.updated_at }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </table>
+      <a href={% url 'login:home' %}>Home</a>
+    </div>
+  </body>
+</html>

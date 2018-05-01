@@ -1,0 +1,42 @@
+<html>
+    <head>
+          <title>users</title>
+    </head>
+    <body>
+        <h2>Sign in</h2>
+        {% with messages = get_flashed_messages(with_categories = True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action='/login' method='post'>
+            <label for="email">Email: <input type="text" name="email" id="email"></label>
+            <label for="password">Password:<input type="text" name="password" id="password"></label> 
+            <input type="submit" value="Log in!">
+        </form>
+        <h2>Add a user</h2>
+        <form action='/users' method='post'>
+            <label for="username">Username:<input type="text" name="username" id="username"></label>
+            <label for="email">Email: <input type="text" name="email" id="email"></label>
+            <label for="password">Password:<input type="text" name="password" id="password"></label> 
+            <input type="submit" value="Create User">
+        </form>
+        <h1>These are all my users!</h1>
+        {% if all_users %}
+        {% for user in all_users %}
+        <form action="/users/{{ user ['id'] }}/delete" method='post'>
+            <p>ID: {{ user ['id'] }}</p>
+            <p>Username: {{ user ['username'] }}</p>
+            <p>Email: {{ user ['email'] }}</p>
+            <p>Password: {{ user ['pw_hash'] }}</p>
+            <a href='/users/{{ user['id'] }}/edit'>Edit</a>
+            <input type="submit" value="Delete">
+            <hr>
+        </form>
+        {% endfor %}
+        {% endif %}
+    </body>
+</html>
+

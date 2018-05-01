@@ -1,0 +1,17 @@
+{% for note in notes %}
+<form action="/note/update" method="post">
+    <h4>Update a new Note</h4>
+    <select name="id">
+      <option>40</option>
+    </select>
+    <input type="text" name="title" value="{{ note['title'] }}">
+    <textarea type="text" name="note" value="{{ note['content'] }}" rows="15" cols="70"></textarea>
+    <input type="submit" id="update_note" value="Update">
+</form>
+
+<div class="note" id="{{ note['id'] }}">
+    <input type="text" name="title" value="{{ note['title'] }}"></input>
+    <textarea type="text" name="title" value="{{ note['content'] }}" rows="10" cols="50"></textarea>
+    <p>{{ note['created_at'] }}</p>
+  </div>
+{% endfor %}

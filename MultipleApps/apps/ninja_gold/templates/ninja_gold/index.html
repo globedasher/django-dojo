@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Django Index</title>
+    {% load staticfiles %}
+    <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'ninja_gold/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'ninja_gold/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h3>Welcome to Ninja Gold!</h3>
+      <h4>Your gold: {{ request.session.gold }}</h4>
+      {% for location, values in places.items %}
+        <form action={% url 'gold:process' location %} name="play" method="POST">
+          {% csrf_token %}
+          <h3>{{ location }}</h3>
+          <h4>(earns {{ values.0 }}-{{ values.1 }} gold)</h4>
+          <input type="submit" value="Find Gold!">
+        </form>
+      {% endfor %}
+      <h5>Activities:</h5>
+      {{ request.session.action }}
+      <div id="activities"></div>
+      <form action={% url 'gold:reset' %} id="reset" action="POST">
+        <input type="submit" value="Reset">
+      </form>
+      <a href={% url 'login:home' %}>Home</a>
+    </div>
+  </body>
+</html>

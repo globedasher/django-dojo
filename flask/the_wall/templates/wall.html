@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Wall</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/main.css') }}">
+        <script src="{{ url_for ('static', filename='js/vendor/jquery-1.12.0.min.js') }}"></script>
+        <script src="{{ url_for ('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2>Coding Dojo Wall</h2>
+                {% if session['first_name'] %}
+                <h5>Welcome {{ session['first_name'] }}</h5>
+                <a href="/logoff">logoff</a>
+                {% endif %}
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <p class="success">{{ message }} {{ session['first_name']}}!</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h3>Post a message</h3>
+            <form action="/message" method="post">
+                <textarea name="message" rows="7" cols="60"></textarea>
+                <input type="submit" value="Post">
+            </form>
+            <div class="message"></div>
+            {% for message in data %}
+            <ul>
+                <li>Posted by: "{{ message['first_name'] }}" @ {{
+                    message['time'] }}</li>
+                <li>{{ message['message'] }}</li>
+                {% for comment in comment_data %}
+                {% if comment['message_id'] == message['id'] %}
+                <ul>
+                    <li>Comment from:"{{ comment['first_name'] }}" @ {{ comment['created_at'] }} </li>
+                    <li>{{ comment['comment'] }}</li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <h4>Post a comment</h4>
+            <form action="/comment" method="post">
+                <input name="hidden_id" value="{{ message['id']}}" type="hidden">
+                <textarea name="comment" rows="7" cols="60"></textarea>
+                <input type="submit" value="comment">
+            </form>
+            {% endfor %}
+
+        </div>
+    </body>
+</html>
+

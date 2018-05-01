@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login and Verification</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/main.css') }}">
+        <script src="{{ url_for ('static', filename='js/vendor/jquery-1.12.0.min.js') }}"></script>
+        <script src="{{ url_for ('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Let's Login and Verify!</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="/login" method="post">
+                Email:<input type="text" name="email">
+                Password:<input type="text" name="password">
+                <input type="submit" value="Login">
+            </form>
+            <form action="/register" method="post">
+                First name:<input type="text" name="first_name">
+                Last name:<input type="text" name="last_name">
+                Email:<input type="text" name="email">
+                Password:<input type="text" name="password">
+                Password confirmation:<input type="text" name="password_confirm">
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </body>
+</html>
+

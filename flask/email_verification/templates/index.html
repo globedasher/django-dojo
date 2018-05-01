@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Ninja Registration!</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/main.css') }}">
+        <script src="{{ url_for ('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h2>The following users have registered!</h2>
+            <table>
+                <tr>
+                    <th>User ID</th>
+                    <th>Email</th>
+                    <th>Created</th>
+                </tr>
+                <tr>
+                    <td>
+                        {% for email in all_emails %}
+                        <p>{{ email['id'] }}</p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for email in all_emails %}
+                        <p>{{ email['address'] }}</p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for email in all_emails %}
+                        <p>{{ email['created_at'] }}</p>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+            <h3>Please register your email address.</h3>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <h1 class="{{ category }}">{{ message }}</h1>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action='/register' method='post'>
+                <input type="text" name="email">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>

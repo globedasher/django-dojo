@@ -1,0 +1,15 @@
+.container {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.error {
+    color: red;
+}
+
+form {
+    height: 250px;
+    width: 200px;
+    border: 1px solid black;
+    text-align: center;
+}

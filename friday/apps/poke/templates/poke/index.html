@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'users/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="messages">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+        <h4>Hello, {{ request.session.name }}!</h4>
+        <h6>Or should we say {{ request.session.alias }}?</h6>
+        <div id='pokes'>
+          {% if pokes %}
+          <table>
+          <tr>
+            <th>Poker Name</th>
+          </tr>
+          {% for poke in pokes %}
+          <tr>
+            <td>{{ poke.pointy_end.name }} poked you {{ poke.poking }} times.</td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          </table>
+          <h4>You have not been poked yet!</h4>
+          {% endif %}
+        </div>
+      <ul>
+        <li><a href={% url 'login:logout' %}>Logout</a></li>
+      </ul>
+
+      <table>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Alias</td>
+          <td>Email</td>
+          <td>Poke History</td>
+          <td>Action</td>
+        <tr>
+      {% for user in all_users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.alias }}</td>
+          <td>{{ user.email }}</td>
+          <td>232390-8234</td>
+          <td><a href={% url 'poke:new' user.id %}>poke</a></td>
+        </tr>
+      {% endfor %}
+      </table>
+
+      <table>
+        {% for poked in poked_total %}
+        <tr>
+        <td>{{ poked.poked.name }}</td>
+        <td>{{ poked.counted_end }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+    </div>
+  </body>
+</html>

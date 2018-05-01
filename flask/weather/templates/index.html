@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Show me the weather!</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+        <script src="../static/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="../static/js/main.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h4 id="33">Weather App!</h4>
+            <form action="/locate" method="post">
+                <input id="location" type="text" name="location">
+                <input type="submit" value="Locate">
+            </form>
+            <div id="weather"></div>
+        </div>
+    </body>
+</html>

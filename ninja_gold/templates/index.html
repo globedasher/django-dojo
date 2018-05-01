@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Ninja Gold!</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/main.css') }}">
+        <script src="{{ url_for ('static', filename='js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Ninja Gold</h1>
+            <h3>Your gold: {{ gold }}</h3>
+            {% for place in range(len_locations) %}
+            <form action='/process_money' method='post'>
+                <h2>{{ locations[place] }}</h2>
+                {% if locations[place] == "Casino" %}
+                <h3>(Earns or loses 0 to {{high[place]}} gold)</h3>
+                {%  else  %}
+                <h3>(Earns {{low[place]}} to {{high[place]}} gold)</h3>
+                {% endif %}
+                <input type="hidden" name="location" value="{{locations[place]}}">
+                <input type="hidden" name="place_position" value="{{ place }}">
+                <input type="submit" name="submit" value="Find Gold!">
+            </form>
+            {% endfor %}
+            <form action='/reset' class="reset" method='post'>
+                <input type="hidden" name="location" value="reset">
+                <input type="submit" name="submit" value="reset">
+            </form>
+            <h3>Activities:</h3>
+            <div class="actions">
+                {% for item in range(history_length, -1, -1) %}
+                <h3>{{ history[item] }}</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

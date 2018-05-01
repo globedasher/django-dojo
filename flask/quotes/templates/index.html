@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Quotes</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+        <script src="../static/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="../static/js/main.js"></script>
+    </head>
+    <body>
+        <div id='container'>
+            <h2>Quotsy</h2>
+            <form action="/quotes/create" method="post">
+                <h4>Add a new Quote</h4>
+                <input type="text" name="author" placeholder="Author">
+                <input type="text" name="quote" placeholder="Quote">
+                <input type="submit"value="Post Quote">
+            </form>
+            <input type="submit" value="Get Quotes" id="get_button">
+            <div id="quotes">
+                {% for quote in quotes %}
+                    <div class="quote">
+                        <h2>{{ quote['author'] }}</h2>
+                        <p>{{ quote['quote'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

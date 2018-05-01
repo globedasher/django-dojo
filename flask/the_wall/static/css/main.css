@@ -1,0 +1,30 @@
+.container {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.header {
+    border: 2px solid black;
+    height: 80px;
+}
+
+.header h2, .header h5, .header a {
+    display: inline;
+}
+
+ul {
+    list-style: none;
+}
+
+form {
+    text-align: right;
+    width: 400px;
+}
